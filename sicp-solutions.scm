@@ -1,3 +1,5 @@
+;;; Author : Sid Jain <sid26@ucla.edu>
+
 ;;; Harold Abelson and Gerald Jay Sussman with Julie Sussman. “Structure and Interpretation of Computer Programs.”
 
 ;;; Exercise 1.3.  Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
@@ -21,3 +23,16 @@
       guess
       (sqrt-iter (improve guess))))
   (sqrt-iter 1.0))
+
+;;; Exercise 1.8.  Newton's method for cube roots is based on the fact that if y is an approximation to the cube root of x, then a better approximation is given by the value (((x/y^2) + 2y) / 3). Use this formula to implement a cube-root procedure analogous to the square-root procedure.
+
+(define (cbrt x)
+  (define (improve guess)
+    (/ (+ (/ x (square guess)) (* 2 guess)) 3))
+  (define (good-enuf? guess)
+    (< (abs (- (* guess guess guess) x)) (* guess 0.0001)))
+  (define (cbrt-iter guess)
+    (if (good-enuf? guess)
+      guess
+      (cbrt-iter (improve guess))))
+  (cbrt-iter 1.0))
