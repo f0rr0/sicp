@@ -49,7 +49,14 @@
   (define (f-iter a b c x)
     (if (= x 2)
       (+ (* a 2) (* b 1) (* c 0))
-      (f-iter (+ a b) (+ (* 2 a ) c) (* 3 a) (- x 1))))
+      (f-iter (+ a b) (+ (* 2 a) c) (* 3 a) (- x 1))))
   (if (< n 3)
     n
     (f-iter 1 2 3 (- n 1))))
+
+;;; Exercise 1.12.  Write a procedure that computes elements of Pascal's triangle by means of a recursive process.
+
+(define (pascal row pos)
+  (cond ((or (> pos row) (< row 1) (< pos 1)) 0)
+        ((or (= pos 1) (= pos row)) 1)
+        (else (+ (pascal (- row 1) (- pos 1)) (pascal (- row 1) pos)))))
